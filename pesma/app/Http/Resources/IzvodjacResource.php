@@ -12,8 +12,9 @@ class IzvodjacResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-
+    
     public static $wrap = 'izvodjac';
+    
 
     public function toArray($request)
     {
@@ -22,7 +23,8 @@ class IzvodjacResource extends JsonResource
             'ime' => $this->resource->ime,
             'prezime' => $this->resource->prezime,
             'godina_rodjenja' => $this->resource->godina_rodjenja,
-            'mesto_rodjenja' => $this->resource->user,
+            'mesto_rodjenja' => $this->resource->mesto_rodjenja,
         ];
     }
+    
 }

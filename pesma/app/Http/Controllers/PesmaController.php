@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Pesma;
 use Illuminate\Http\Request;
 use App\Http\Resources\PesmaResource;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PesmaController extends Controller
 {
@@ -43,7 +45,26 @@ class PesmaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator=Validator::make($request->all(),[
+            'naziv_pesme'=>'required|String|max:255',
+            'zanr_id'=>'required',
+            'izvodjac_id'=>'required',
+            //'user_id'=>'required'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+
+        $pesma = new Pesma;
+        $pesma->naziv_pesme = $request->naziv_pesme;
+        $pesma->zanr_id = $request->zanr_id;
+        $pesma->izvodjac_id=$request->izvodjac_id;
+        $pesma->user_id=Auth::user()->id;
+
+        $pesma->save();
+
+        return response()->json(['Pesma je uspseno sacuvana!', new PesmaResource($pesma)]);
     }
 
     /**
@@ -79,7 +100,32 @@ class PesmaController extends Controller
      */
     public function update(Request $request, Pesma $pesma)
     {
-        //
+        $validator=Validator::make($request->all(),[
+            'naziv_pesme'=>'required|String|max:255',
+            'zanr_id'=>'required',
+            'izvodjac_id'=>'required',
+            //'user_id'=>'required'
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+
+        //print($knjiga);
+
+        $pesma = new Pesma;
+        $pesma->naziv_pesme = $request->naziv_pesme;
+        $pesma->zanr_id = $request->zanr_id;
+        $pesma->izvodjac_id=$request->izvodjac_id;
+        $pesma->user_id=Auth::user()->id;
+
+        $result = $pesma->update();
+
+        if($result==false){
+            return response()->json('Problem prilikom azuriranja pesme!');
+        }
+
+        return response()->json(['Pesma je uspesno azurirana!', new PesmaResource($pesma)]);
     }
 
     /**
@@ -90,6 +136,9 @@ class PesmaController extends Controller
      */
     public function destroy(Pesma $pesma)
     {
-        //
+        print($pesma);
+        $pesma->delete();
+
+        return response()->json('Pesma '.$pesma->naziv_pesme .'je uspesno obrisana!');
     }
 }

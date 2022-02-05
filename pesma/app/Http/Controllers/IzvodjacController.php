@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\IzvodjacResource;
 use App\Models\Izvodjac;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class IzvodjacController extends Controller
     public function index()
     {
         $izvodjaci=Izvodjac::all();
-        return $izvodjaci;
+        return IzvodjacResource::collection($izvodjaci);
     }
 
     /**
