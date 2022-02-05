@@ -12,8 +12,14 @@ class ZanrResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+
+    public static $wrap = 'zanr';
+
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->resource->id,
+            'naziv_zanra' => $this->resource->naziv_zanra,
+        ];
     }
 }
