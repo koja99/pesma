@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ZanrController;
+use App\Http\Controllers\PesmaController;
+use App\Http\Controllers\IzvodjacController;
+use App\Http\Controllers\PesmaIzvodjacController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,9 +24,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/users',[UserController::class, 'index']);
-Route::get('/users/{id}',[UserController::class, 'show']);
+Route::get('/pesme/izvodjac/{id}',[PesmaIzvodjacController::class, 'index']);
 
 //Route::post('/register',[UserController::class, 'store']);
 Route::post('/zanr',[ZanrController::class, 'store']);
+
+Route::resource('izvodjaci',IzvodjacController::class);
+Route::resource('pesme',PesmaController::class,);
+
 
 

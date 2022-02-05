@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Zanr;
+use App\Models\Izvodjac;
 use Illuminate\Http\Request;
 
-class ZanrController extends Controller
+class IzvodjacController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class ZanrController extends Controller
      */
     public function index()
     {
-        //
+        $izvodjaci=Izvodjac::all();
+        return $izvodjaci;
     }
 
     /**
@@ -35,40 +36,27 @@ class ZanrController extends Controller
      */
     public function store(Request $request)
     {
-
-        $zanr=new Zanr();
-        $zanr->naziv_zanra=$request->naziv_zanra;
-        $zanr->opis_zanra=$request->opis_zanra;
-        $result=$zanr->save();
-        if($result==true){
-            return 'Zanr je uspesno sacuvana!';
-        }
-        return 'Zanr nije sacuvan!';
-        
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Zanr  $zanr
+     * @param  \App\Models\Izvodjac  $izvodjac
      * @return \Illuminate\Http\Response
      */
-    public function show($zanr_id)
+    public function show(Izvodjac $izvodjac)
     {
-        $zanr = Zanr::find($zanr_id);
-        if(is_null($zanr)){
-            return response()->json('Data not found',404);
-        }
-        return response()->json($zanr);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Zanr  $zanr
+     * @param  \App\Models\Izvodjac  $izvodjac
      * @return \Illuminate\Http\Response
      */
-    public function edit(Zanr $zanr)
+    public function edit(Izvodjac $izvodjac)
     {
         //
     }
@@ -77,10 +65,10 @@ class ZanrController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Zanr  $zanr
+     * @param  \App\Models\Izvodjac  $izvodjac
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Zanr $zanr)
+    public function update(Request $request, Izvodjac $izvodjac)
     {
         //
     }
@@ -88,10 +76,10 @@ class ZanrController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Zanr  $zanr
+     * @param  \App\Models\Izvodjac  $izvodjac
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Zanr $zanr)
+    public function destroy(Izvodjac $izvodjac)
     {
         //
     }
